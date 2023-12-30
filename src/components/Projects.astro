@@ -1,0 +1,73 @@
+---
+import preview from '../../public/preview.jpg'
+import ReactIcon from '../components/icons/React.astro'
+import TagBadge from '../components/TagBadge.astro'
+
+const TAGS = {
+  REACT:{
+    name: "React.js",
+    icon: ReactIcon,
+    class: "bg-slate-700",
+  }
+}
+
+const PROJECTS = [
+  {
+    title: "Blog Personal",
+    description: "Un blog personal desarrollado con tecnologías modernas como React.js para el front-end y Node.js para el back-end. Incluye funcionalidades como autenticación de usuarios, comentarios y un panel de administración.",
+    image: "/preview.jpg",
+    // tags: [TAGS.REACT, "Node.js", "MongoDB", "CSS3"],
+    tags: [TAGS.REACT, TAGS.REACT],
+    link_to_demo: "https://www.example.com/blog-personal-demo",
+    link_to_repo: "https://github.com/tuusuario/blog-personal"
+  },
+  {
+    title: "Tienda en Línea",
+    description: "Una tienda en línea construida utilizando tecnologías de comercio electrónico como Shopify. Incluye características de carrito de compras, administración de inventario y pasarelas de pago integradas.",
+    image: "https://placehold.co/600x400",
+    tags: [TAGS.REACT, TAGS.REACT],
+    // tags: ["Shopify", "eCommerce", "HTML5", "CSS3"],
+    link_to_demo: "https://placehold.co/600x400",
+    link_to_repo: "https://github.com/tuusuario/tienda-en-linea"
+  },
+  {
+    title: "Portafolio Profesional",
+    description: "Un portafolio profesional desarrollado para mostrar habilidades y proyectos anteriores. Diseñado con un enfoque minimalista utilizando HTML, CSS y JavaScript para lograr una experiencia de usuario agradable.",
+    image: "https://placehold.co/600x400",
+    tags: [TAGS.REACT, TAGS.REACT],
+    // tags: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+    link_to_demo: "https://www.example.com/portafolio-demo",
+    link_to_repo: "https://github.com/tuusuario/portafolio-profesional"
+  }
+];
+---
+
+{
+  PROJECTS.map(project => {
+    const {title,description,image,tags,link_to_demo,link_to_repo} = project
+    return (
+      <article class="mt-12 flex flex-col gap-4">
+        <h3 class="text-sky-400 font-semibold text-xl">{title}</h3>  
+        <p class="text-pretty">{description}</p>
+        <ul class="flex">
+        {
+          tags.map(tag => {
+          return (
+            <li>
+              <TagBadge class={tag.class}>
+                <tag.icon class="size-4"></tag.icon>
+                {tag.name}
+              </TagBadge>  
+            </li>
+            )})
+        }  
+        </ul>
+        <img src={image} alt="Captura de pantalla del proyecto" class="rounded w-full">
+        <div class="flex gap-4">
+          <a href={link_to_demo} target="_blank" class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">LIVE DEMO</a>  
+          <a href={link_to_repo} target="_blank" class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none ">GITHUB REPO</a>  
+        </div>
+      </article>
+    )
+  })
+}
